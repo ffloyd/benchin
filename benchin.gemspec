@@ -27,20 +27,27 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  # Essential dev deps
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'rake', '~> 10.0'
+
+  # Testing
   spec.add_development_dependency 'rspec', '~> 3.0'
 
+  # Test Coverage
+  spec.add_development_dependency 'codecov'
+  spec.add_development_dependency 'simplecov'
+
+  # Documentation
+  spec.add_development_dependency 'yard'
+
+  # Code & Documentation Quality
   spec.add_development_dependency 'forspell', '~> 0.0.8'
+  spec.add_development_dependency 'inch'
   spec.add_development_dependency 'mdl'
   spec.add_development_dependency 'reek'
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'rubocop-md'
   spec.add_development_dependency 'rubocop-performance'
   spec.add_development_dependency 'rubocop-rspec'
-
-  spec.add_development_dependency 'codecov'
-  spec.add_development_dependency 'simplecov'
-
-  spec.add_development_dependency 'yard'
 end

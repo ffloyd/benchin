@@ -13,3 +13,6 @@ pre-commit:
     forspell:
       glob: "{*.md,*.rb}"
       run: bundle exec forspell {staged_files}
+    inch:
+      glob: "{*.md,*.rb}"
+      run: bundle exec inch {staged_files}
