@@ -25,4 +25,6 @@ task :mdl do |_task|
   MarkdownLint.run(PATHS_FOR_MDL)
 end
 
-task default: %i[rubocop reek spellcheck mdl inch spec]
+# TODO: spellcheck and mdl tasks stop execution even with successful result
+# should be fixed someday
+task default: %i[rubocop reek inch spec spellcheck mdl]

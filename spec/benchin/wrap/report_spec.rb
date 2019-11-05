@@ -93,4 +93,18 @@ RSpec.describe Benchin::Wrap::Report do
       end
     end
   end
+
+  describe '#to_s' do
+    subject(:invoke) { instance.to_s }
+
+    before do
+      instance
+        .add_time(%w[TOP NESTED], 10.0)
+        .add_time(%w[TOP], 10.0)
+    end
+
+    it 'renders a string' do
+      expect(invoke).to be_a(String)
+    end
+  end
 end
