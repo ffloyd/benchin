@@ -1,18 +1,18 @@
 require 'rainbow'
 
 module Benchin
-  module Wrap
+  class Wrap
     class Report
+      # Human readable {Node} printing.
+      #
+      # With TTY colors.
+      #
       # @api private
       class NodePrinter
         FIELD_SPACE = 14
         VALUE_SPACE = 7
         PRECISION = 3
 
-        # Human readable report generator.
-        #
-        # Uses TTY colors.
-        #
         # @param node [Node] node to print
         # @param level [Integer] defines current level of nesting
         def initialize(node, level: 0)
@@ -23,7 +23,7 @@ module Benchin
         # @return [String] rendered report
         def to_s
           [
-            body,
+            (@node.is_a?(Node::Virtual) ? virtual_body : body),
             @node.nested.values.map do |child_node|
               self.class.new(child_node, level: @level + 1).to_s
             end
@@ -31,6 +31,16 @@ module Benchin
         end
 
         private
+
+        def virtual_body
+          nav = '|   '
+          prefix = nav * @level
+
+          [
+            title,
+            nav + time_all
+          ].map { |line| prefix + line }.join("\n")
+        end
 
         def body
           nav = '|   '

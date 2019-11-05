@@ -1,5 +1,5 @@
 module Benchin
-  module Wrap
+  class Wrap
     class Report
       # @api private
       class Node
@@ -41,6 +41,33 @@ module Benchin
           child_nodes = nested.values
 
           @child_seconds ||= child_nodes.map(&:total_seconds).sum.to_f
+        end
+
+        # Virtual Node is a node without ability to track time in.
+        #
+        # It is designed to be used as container for nested nodes.
+        #
+        # @api private
+        class Virtual < Node
+          def total_seconds
+            child_seconds
+          end
+
+          def self_seconds
+            0.0
+          end
+
+          def add_time
+            raise 'Cannot add time to virtual node'
+          end
+
+          def to_h
+            {
+              name: name,
+              total_seconds: total_seconds,
+              nested: nested.values.map(&:to_h)
+            }
+          end
         end
       end
     end

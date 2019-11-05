@@ -2,13 +2,14 @@ require_relative './report/node'
 require_relative './report/node_printer'
 
 module Benchin
-  module Wrap
+  class Wrap
     # Represents tree-like time measurement data produced by {Wrap}.
     #
-    # See {#to_a} method for more concrete example.
+    # See {#to_h} method for more concrete example.
     class Report
-      def initialize
-        @data_tree = Node.new('ROOT')
+      # @param name [String] report name
+      def initialize(name)
+        @root = Node::Virtual.new(name)
       end
 
       # Adds seconds to a {path} in a tree and increases calls count by 1.
@@ -18,7 +19,7 @@ module Benchin
       #
       # @return [Report] self
       def add_time(path, seconds)
-        target_node = path.reduce(@data_tree) do |node, name|
+        target_node = path.reduce(@root) do |node, name|
           node.nested[name] ||= Node.new(name)
         end
 
@@ -30,54 +31,56 @@ module Benchin
       # Transforms report to a basic ruby types: arrays and hashes.
       #
       # @example
-      #   report = Report.new
+      #   report = Report.new('Report name')
       #   report
       #     .add_time(%w[TOP NESTED], 10.0)
       #     .add_time(%w[TOP], 10.0)
       #     .add_time(%w[TOP], 5.0)
       #     .add_time(%w[NESTED], 7.0)
-      #     .to_a
+      #     .to_h
       #   # will produce following structure
-      #   [
-      #     {
-      #       name: 'TOP',
-      #       total_seconds: 15.0,
-      #       self_seconds: 5.0,
-      #       child_seconds: 10.0,
-      #       calls: 2,
-      #       nested: [
-      #         {
-      #           name: 'NESTED',
-      #           total_seconds: 10.0,
-      #           self_seconds: 10.0,
-      #           child_seconds: 0.0,
-      #           calls: 1,
-      #           nested: []
-      #         }
-      #       ]
-      #     },
-      #     {
-      #       name: 'NESTED',
-      #       total_seconds: 7.0,
-      #       self_seconds: 7.0,
-      #       child_seconds: 0.0,
-      #       calls: 1,
-      #       nested: []
-      #     }
-      #   ]
+      #   {
+      #     name: 'Report name',
+      #     total_seconds: 22.0,
+      #     nested: [
+      #       {
+      #         name: 'TOP',
+      #         total_seconds: 15.0,
+      #         self_seconds: 5.0,
+      #         child_seconds: 10.0,
+      #         calls: 2,
+      #         nested: [
+      #           {
+      #             name: 'NESTED',
+      #             total_seconds: 10.0,
+      #             self_seconds: 10.0,
+      #             child_seconds: 0.0,
+      #             calls: 1,
+      #             nested: []
+      #           }
+      #         ]
+      #       },
+      #       {
+      #         name: 'NESTED',
+      #         total_seconds: 7.0,
+      #         self_seconds: 7.0,
+      #         child_seconds: 0.0,
+      #         calls: 1,
+      #         nested: []
+      #       }
+      #     ]
+      #   }
       #
-      # @return [Array] report represented using {Array}s and {Hash}es. It's safe to modify it.
-      def to_a
-        @data_tree.to_h[:nested]
+      # @return [Hash] report represented using {Array}s and {Hash}es. It's safe to modify it.
+      def to_h
+        @root.to_h
       end
 
       # Renders human readable report.
       #
       # @return [String] human readable report with TTY colors
       def to_s
-        @data_tree.nested.values.map do |node|
-          NodePrinter.new(node).to_s
-        end.join("\n")
+        NodePrinter.new(@root).to_s
       end
     end
   end

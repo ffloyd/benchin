@@ -1,21 +1,22 @@
 RSpec.describe Benchin::Wrap do
-  let(:report) { described_class.report }
+  subject(:instance) { described_class.new(name) }
+
+  let(:name) { 'REPORT NAME' }
+  let(:report) { instance.report }
 
   before do
-    described_class.reset
-
     allow(report).to receive(:add_time)
   end
 
-  describe '.call' do
+  describe '#call' do
     context 'when used in 2 places without nesting and code executed twice' do
       subject(:code_execution) do
         2.times do
-          described_class.call('AAA') do
+          instance.call('AAA') do
             10.times { Math.sqrt(12_345) }
           end
 
-          described_class.call('BBB') do
+          instance.call('BBB') do
             10.times { Math.sqrt(12_345) }
           end
         end
@@ -43,16 +44,16 @@ RSpec.describe Benchin::Wrap do
     context 'when used in 2 places with nesting and code executed twice' do
       subject(:code_execution) do
         2.times do
-          described_class.call('AAA') do
+          instance.call('AAA') do
             10.times do
               Math.sqrt(12_345)
-              described_class.call('BBB') do
+              instance.call('BBB') do
                 10.times { Math.sqrt(12_345) }
               end
             end
           end
 
-          described_class.call('BBB') do
+          instance.call('BBB') do
             10.times { Math.sqrt(12_345) }
           end
         end
@@ -84,11 +85,11 @@ RSpec.describe Benchin::Wrap do
     end
   end
 
-  describe '.reset' do
-    subject(:reset) { described_class.reset }
+  describe '#reset' do
+    subject(:reset) { instance.reset }
 
     it 'resets report' do
-      expect { reset }.to(change { described_class.report.object_id })
+      expect { reset }.to(change { instance.report.object_id })
     end
   end
 end
