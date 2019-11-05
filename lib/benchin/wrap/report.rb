@@ -1,4 +1,5 @@
 require_relative './report/node'
+require_relative './report/node_printer'
 
 module Benchin
   module Wrap
@@ -68,6 +69,15 @@ module Benchin
       # @return [Array] report represented using {Array}s and {Hash}es. It's safe to modify it.
       def to_a
         @data_tree.to_h[:nested]
+      end
+
+      # Renders human readable report.
+      #
+      # @return [String] human readable report with TTY colors
+      def to_s
+        @data_tree.nested.values.map do |node|
+          NodePrinter.new(node).to_s
+        end.join("\n")
       end
     end
   end

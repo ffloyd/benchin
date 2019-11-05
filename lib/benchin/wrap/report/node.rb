@@ -17,7 +17,7 @@ module Benchin
         end
 
         def add_call(seconds)
-          @nested_seconds = nil
+          @child_seconds = nil
           @calls += 1
           @total_seconds += seconds
         end
@@ -27,18 +27,20 @@ module Benchin
             name: name,
             calls: calls,
             total_seconds: total_seconds,
-            self_seconds: total_seconds - nested_seconds,
-            child_seconds: nested_seconds,
+            self_seconds: self_seconds,
+            child_seconds: child_seconds,
             nested: nested.values.map(&:to_h)
           }
         end
 
-        def nested_seconds
+        def self_seconds
+          total_seconds - child_seconds
+        end
+
+        def child_seconds
           child_nodes = nested.values
 
-          @nested_seconds ||= 0.0 +
-                              child_nodes.map(&:total_seconds).sum +
-                              child_nodes.map(&:nested_seconds).sum
+          @child_seconds ||= child_nodes.map(&:total_seconds).sum.to_f
         end
       end
     end

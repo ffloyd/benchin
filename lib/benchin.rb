@@ -20,5 +20,14 @@ module Benchin
     def wrap(name, &block)
       Wrap.call(name, &block)
     end
+
+    # Alias for {Wrap.report}.
+    #
+    # {include:Wrap.report}
+    #
+    # @return [Wrap::Report] current report, use {Wrap::Report#to_s} for printing.
+    def wrap_report
+      Wrap.report
+    end
   end
 end
