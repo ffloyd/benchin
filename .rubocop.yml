@@ -20,6 +20,9 @@ Style/FrozenStringLiteralComment:
 Metrics/ParameterLists:
   CountKeywordArgs: false
 
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+
 Naming/UncommunicativeMethodParamName:
   Exclude:
     - '**/*.md'

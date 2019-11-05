@@ -1,0 +1,11 @@
+---
+detectors:
+  TooManyInstanceVariables:
+    exclude:
+      - 'Benchin::Wrap::Report::Node'
+  TooManyStatements:
+    exclude:
+      - 'Benchin::Wrap#call'
+  DuplicateMethodCall:
+    allow_calls:
+      - 'Process.clock_gettime'

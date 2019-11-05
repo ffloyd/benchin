@@ -5,7 +5,6 @@ module Benchin
     # See {#to_a} method for more concrete example.
     class Report
       # @api private
-      # :reek:TooManyInstanceVariables
       class Node
         attr_reader :name
         attr_reader :calls
