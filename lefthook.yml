@@ -15,4 +15,4 @@ pre-commit:
       run: bundle exec forspell {staged_files}
     inch:
       glob: "{*.md,*.rb}"
-      run: bundle exec inch {staged_files}
+      run: bundle exec rake inch
