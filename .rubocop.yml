@@ -12,6 +12,7 @@ Metrics/LineLength:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+    - '*.gemspec'
 
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never

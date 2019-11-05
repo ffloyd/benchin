@@ -1,4 +1,15 @@
 require 'bundler/setup'
+
+require 'simplecov'
+require 'codecov'
+
+SimpleCov.minimum_coverage 95
+SimpleCov.formatter = SimpleCov::Formatter::Codecov unless ENV['CODECOV_TOKEN'].nil?
+
+SimpleCov.start do
+  add_filter '/spec/'
+end
+
 require 'benchin'
 
 RSpec.configure do |config|
