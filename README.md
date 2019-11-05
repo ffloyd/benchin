@@ -1,8 +1,10 @@
 # Benchin
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/benchin`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Build Status](https://github.com/ffloyd/benchin/workflows/Build/badge.svg)](https://github.com/ffloyd/benchin/actions)
+[![codecov](https://codecov.io/gh/ffloyd/benchin/branch/master/graph/badge.svg)](https://codecov.io/gh/ffloyd/benchin)
+[![Gem Version](https://badge.fury.io/rb/benchin.svg)](https://badge.fury.io/rb/benchin)
 
-TODO: Delete this and the text above, and describe your gem
+Toolset for performance investigations in Ruby.
 
 ## Installation
 
@@ -14,11 +16,17 @@ gem 'benchin'
 
 And then execute:
 
-    $ bundle
+```sh
+bundle
+```
+
+bundle
 
 Or install it yourself as:
 
-    $ gem install benchin
+```sh
+gem install benchin
+```
 
 ## Usage
 
@@ -32,7 +40,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/benchin. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at [ffloyd/benchin](https://github.com/ffloyd/benchin). This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -40,4 +48,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Benchin project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/benchin/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Benchin project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/ffloyd/benchin/blob/master/CODE_OF_CONDUCT.md).
