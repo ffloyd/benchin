@@ -11,7 +11,7 @@ module Benchin
       # @return [Report] collected measurement data.
       attr_reader :report
 
-      # Reset the {.report} to an empty state.
+      # Resets the {.report} to an empty state.
       def reset
         @report = Report.new
         @current_path = []
