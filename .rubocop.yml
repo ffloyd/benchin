@@ -1,0 +1,36 @@
+require:
+  - rubocop-rspec
+  - rubocop-performance
+  - rubocop-md
+
+AllCops:
+  TargetRubyVersion: 2.6
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+
+Naming/UncommunicativeMethodParamName:
+  Exclude:
+    - '**/*.md'
+
+Style/MixinUsage:
+  Exclude:
+    - '**/*.md'
+
+Lint/UnusedMethodArgument:
+  Exclude:
+    - '**/*.md'
+
+Lint/UnusedBlockArgument:
+  Exclude:
+    - '**/*.md'

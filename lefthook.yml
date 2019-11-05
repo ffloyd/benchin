@@ -1,0 +1,15 @@
+pre-commit:
+  parallel: true
+  commands:
+    rubocop:
+      glob: "{*.rb,*.md,*.gemspec,Gemfile,Rakefile}"
+      run: bundle exec rubocop {staged_files}
+    reek:
+      glob: "*.rb"
+      run: bundle exec reek {staged_files}
+    markdownlinter:
+      glob: "*.md"
+      run: bundle exec mdl {staged_files}
+    forspell:
+      glob: "{*.md,*.rb}"
+      run: bundle exec forspell {staged_files}

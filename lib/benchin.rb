@@ -1,6 +1,7 @@
-require "benchin/version"
+require 'benchin/version'
 
+# Benchmarking toolset
 module Benchin
+  # Base error class
   class Error < StandardError; end
-  # Your code goes here...
 end
