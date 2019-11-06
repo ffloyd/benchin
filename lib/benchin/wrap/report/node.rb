@@ -58,7 +58,7 @@ module Benchin
           end
 
           def add_time
-            raise 'Cannot add time to virtual node'
+            raise 'Cannot add time to a virtual node'
           end
 
           def to_h

@@ -4,6 +4,26 @@ module Benchin
   # Benchmark tool for high-level nested measurement. Check out {Report#to_h} for an example of
   # the report structure.
   #
+  # It's designed to use when:
+  #
+  # - you have some slow code (even one execution takes significant time)
+  # - you know which blocks of code you have to measure
+  # - you have to measure:
+  #   - total time spend in each block
+  #   - time spend in blocks executed inside a concrete block (child time)
+  #   - time spend in a concrete block minus child block's time (self time)
+  #
+  # By using this information you can discover which block of slow code is the slowest one.
+  #
+  # Measurement uses WALL time.
+  #
+  # One of the most common possible examples of usage is to investigate slow requests in legacy and
+  # big codebases. In this case more classic instruments like stack profiling can be too
+  # focused on particular methods instead of logic chunks in your code.
+  #
+  # It can be inconvenient to 'drill' {Wrap} instance to all the places where we have to wrap some code.
+  # To address this issue we have helper {Benchin.wrap} which uses global {Wrap} instance.
+  #
   # @example Measure request timings in controller
   #   class SomeDirtyController < SomeWebFramework::Controller
   #     def create(params)
@@ -17,7 +37,7 @@ module Benchin
   #         render data
   #       end
   #
-  #       File.write('report.txt', @bench.report.to_s)
+  #       File.write('report.txt', @bench.to_s)
   #     end
   #
   #     private
@@ -107,6 +127,22 @@ module Benchin
       @current_path.pop
 
       result
+    end
+
+    # Shortcut for `report.to_s`.
+    #
+    # @see {Report.to_s}
+    # @return [String]
+    def to_s
+      report.to_s
+    end
+
+    # Shortcut for `report.to_h`.
+    #
+    # @see {Report.to_s}
+    # @return [Hash]
+    def to_h
+      report.to_s
     end
   end
 end
