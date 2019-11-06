@@ -30,7 +30,7 @@ gem install benchin
 
 ## Usage
 
-Check out [documentation](https://rubydoc.info/github/ffloyd/benchin/master) for usage examples.
+Check out [documentation](https://rubydoc.info/github/ffloyd/benchin/master/Benchin) for usage examples.
 
 ## Development
 
