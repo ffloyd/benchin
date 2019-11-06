@@ -3,6 +3,17 @@ require 'benchin/wrap'
 
 # Benchmarking toolset.
 #
+# @example Using {Wrap} global instance
+#   Benchin.wrap.reset
+#   Benchin.wrap.call('Expesive Code') do
+#     expesive_logic
+#     10.times do
+#       Benchin.wrap.call('Nested Hot Operation') { do_something }
+#     end
+#   end
+#
+#   puts Benchin.wrap
+#
 # @see Wrap
 module Benchin
   # Base error class
