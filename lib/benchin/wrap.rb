@@ -22,7 +22,7 @@ module Benchin
   # focused on particular methods instead of logic chunks in your code.
   #
   # It can be inconvenient to 'drill' {Wrap} instance to all the places where we have to wrap some code.
-  # To address this issue we have helper {Benchin.wrap} which uses global {Wrap} instance.
+  # To address this issue we have helper `Benchin.wrap` which returns global {Wrap} instance.
   #
   # @example Measure request timings in controller
   #   class SomeDirtyController < SomeWebFramework::Controller
@@ -131,7 +131,7 @@ module Benchin
 
     # Shortcut for `report.to_s`.
     #
-    # @see {Report.to_s}
+    # @see Report#to_s
     # @return [String]
     def to_s
       report.to_s
@@ -139,7 +139,7 @@ module Benchin
 
     # Shortcut for `report.to_h`.
     #
-    # @see {Report.to_s}
+    # @see Report#to_h
     # @return [Hash]
     def to_h
       report.to_s
