@@ -1,5 +1,7 @@
 require 'benchin/version'
+
 require 'benchin/wrap'
+require 'benchin/stack'
 
 # Benchmarking toolset.
 #
