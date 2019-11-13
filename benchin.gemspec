@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'rainbow', '~> 3.0'
+  spec.add_dependency 'stackprof', '~> 0.2'
 
   # Essential dev deps
   spec.add_development_dependency 'bundler', '~> 2.0'

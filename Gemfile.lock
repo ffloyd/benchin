@@ -3,6 +3,7 @@ PATH
   specs:
     benchin (0.1.0)
       rainbow (~> 3.0)
+      stackprof (~> 0.2)
 
 GEM
   remote: https://rubygems.org/
@@ -127,6 +128,7 @@ GEM
     simplecov-html (0.10.2)
     slop (4.7.0)
     sparkr (0.4.1)
+    stackprof (0.2.13)
     term-ansicolor (1.7.1)
       tins (~> 1.0)
     thread_safe (0.3.6)
