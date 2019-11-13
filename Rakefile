@@ -17,14 +17,26 @@ PATHS_FOR_MDL = ['README.md'].freeze
 
 desc 'Run self spellchecking'
 task :spellcheck do |_task|
+  puts 'Run forspell checker...'
   Forspell::CLI.new(PATHS_TO_SPELLCHECK).call
+rescue SystemExit => e
+  if e.status.zero?
+    puts 'Everything is ok.'
+  else
+    exit e.status
+  end
 end
 
 desc 'Run markdown linter'
 task :mdl do |_task|
+  puts 'Run MDL linter...'
   MarkdownLint.run(PATHS_FOR_MDL)
+rescue SystemExit => e
+  if e.status.zero?
+    puts 'Everything is ok.'
+  else
+    exit e.status
+  end
 end
 
-# TODO: spellcheck and mdl tasks stop execution even with successful result
-# should be fixed someday
-task default: %i[rubocop reek inch spec spellcheck mdl]
+task default: %i[rubocop spec reek inch spellcheck mdl]
