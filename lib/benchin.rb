@@ -16,7 +16,15 @@ require 'benchin/stack'
 #
 #   puts Benchin.wrap
 #
+# @example Using {Stack} shortcut instance
+#   report = Benchin.stack do
+#     expesive_logic
+#   end
+#
+#   puts report.to_s
+#
 # @see Wrap
+# @see Stack
 module Benchin
   # Base error class
   class Error < StandardError; end
@@ -31,6 +39,18 @@ module Benchin
     # @return [Wrap]
     def wrap
       @wrap ||= Wrap.new('GLOBAL')
+    end
+
+    # Shortcut for stack profiling
+    #
+    # @yield code block to profile
+    # @return [::Benchin::Stack::Report] generated report
+    def stack(&block)
+      stack_profiler = ::Benchin::Stack.new
+
+      stack_profiler.call(&block)
+
+      stack_profiler.report
     end
   end
 end

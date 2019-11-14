@@ -14,4 +14,10 @@ RSpec.describe Benchin do
       expect(wrap.object_id).to eq second_call.object_id
     end
   end
+
+  describe '.stack' do
+    subject(:stack) { described_class.stack { Math.sqrt(123) } }
+
+    it { expect(stack).to be_a(Benchin::Stack::Report) }
+  end
 end
