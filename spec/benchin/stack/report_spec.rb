@@ -81,21 +81,31 @@ RSpec.describe Benchin::Stack::Report do
         {
           samples: 123,
           missed_samples: 10,
+          global_percentage: 100.0,
+          local_percentage: 100.0,
           nested: {
             'A' => {
               samples: 123,
+              global_percentage: 100.0,
+              local_percentage: 100.0,
               nested: {
                 'B' => {
                   samples: 100,
+                  global_percentage: 81.3,
+                  local_percentage: 81.3,
                   nested: {
                     '#pow' => {
                       samples: 100,
+                      global_percentage: 81.3,
+                      local_percentage: 100.0,
                       nested: {}
                     }
                   }
                 },
                 '#mult' => {
                   samples: 23,
+                  global_percentage: 18.699,
+                  local_percentage: 18.699,
                   nested: {}
                 }
               }
@@ -116,25 +126,37 @@ RSpec.describe Benchin::Stack::Report do
         {
           samples: 123 + 50,
           missed_samples: 10,
+          global_percentage: 100.0,
+          local_percentage: 100.0,
           nested: {
             'A' => {
               samples: 123 + 50,
+              global_percentage: 100.0,
+              local_percentage: 100.0,
               nested: {
                 'B' => {
                   samples: 100 + 30,
+                  global_percentage: 75.144,
+                  local_percentage: 75.144,
                   nested: {
                     '#pow' => {
                       samples: 100,
+                      global_percentage: 57.803,
+                      local_percentage: 76.923,
                       nested: {}
                     },
                     '#div' => {
                       samples: 30,
+                      global_percentage: 17.341,
+                      local_percentage: 23.076,
                       nested: {}
                     }
                   }
                 },
                 '#mult' => {
                   samples: 23 + 20,
+                  global_percentage: 24.855,
+                  local_percentage: 24.855,
                   nested: {}
                 }
               }
@@ -155,6 +177,8 @@ RSpec.describe Benchin::Stack::Report do
         {
           samples: 0,
           missed_samples: 0,
+          global_percentage: 100.0,
+          local_percentage: 100.0,
           nested: {}
         }
       end
