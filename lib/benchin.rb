@@ -1,5 +1,7 @@
 require 'benchin/version'
 
+require 'benchin/data_tree'
+
 require 'benchin/wrap'
 require 'benchin/stack'
 

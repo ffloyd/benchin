@@ -1,6 +1,10 @@
 RSpec.describe Benchin::Stack::Report do
   subject(:report) { described_class.new }
 
+  def float_eq(value)
+    be_within(0.001).of(value)
+  end
+
   shared_context 'with 1 profile' do
     before do
       report.add_profile(stackprof_data)
@@ -91,12 +95,12 @@ RSpec.describe Benchin::Stack::Report do
               nested: {
                 'B' => {
                   samples: 100,
-                  global_percentage: 81.3,
-                  local_percentage: 81.3,
+                  global_percentage: float_eq(81.3),
+                  local_percentage: float_eq(81.3),
                   nested: {
                     '#pow' => {
                       samples: 100,
-                      global_percentage: 81.3,
+                      global_percentage: float_eq(81.3),
                       local_percentage: 100.0,
                       nested: {}
                     }
@@ -104,8 +108,8 @@ RSpec.describe Benchin::Stack::Report do
                 },
                 '#mult' => {
                   samples: 23,
-                  global_percentage: 18.699,
-                  local_percentage: 18.699,
+                  global_percentage: float_eq(18.699),
+                  local_percentage: float_eq(18.699),
                   nested: {}
                 }
               }
@@ -115,7 +119,7 @@ RSpec.describe Benchin::Stack::Report do
       end
 
       it 'correctly represents data via #to_h' do
-        expect(report.to_h).to eq expected_hash
+        expect(report.to_h).to match expected_hash
       end
     end
 
@@ -136,27 +140,27 @@ RSpec.describe Benchin::Stack::Report do
               nested: {
                 'B' => {
                   samples: 100 + 30,
-                  global_percentage: 75.144,
-                  local_percentage: 75.144,
+                  global_percentage: float_eq(75.144),
+                  local_percentage: float_eq(75.144),
                   nested: {
                     '#pow' => {
                       samples: 100,
-                      global_percentage: 57.803,
-                      local_percentage: 76.923,
+                      global_percentage: float_eq(57.803),
+                      local_percentage: float_eq(76.923),
                       nested: {}
                     },
                     '#div' => {
                       samples: 30,
-                      global_percentage: 17.341,
-                      local_percentage: 23.076,
+                      global_percentage: float_eq(17.341),
+                      local_percentage: float_eq(23.076),
                       nested: {}
                     }
                   }
                 },
                 '#mult' => {
                   samples: 23 + 20,
-                  global_percentage: 24.855,
-                  local_percentage: 24.855,
+                  global_percentage: float_eq(24.855),
+                  local_percentage: float_eq(24.855),
                   nested: {}
                 }
               }
@@ -166,7 +170,7 @@ RSpec.describe Benchin::Stack::Report do
       end
 
       it 'correctly represents data via #to_h' do
-        expect(report.to_h).to eq expected_hash
+        expect(report.to_h).to match expected_hash
       end
     end
   end

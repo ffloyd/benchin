@@ -1,4 +1,4 @@
-require_relative './report_node'
+require_relative './report/tree'
 
 module Benchin
   class Stack
@@ -8,7 +8,7 @@ module Benchin
     class Report
       def initialize
         @missed_samples = 0
-        @root_node = ReportNode.new('ROOT')
+        @tree = Tree.new
       end
 
       def add_profile(stackprof_data)
@@ -24,16 +24,18 @@ module Benchin
       end
 
       def to_h
-        @root_node.to_h.merge(missed_samples: @missed_samples)
+        @tree.to_h.merge(missed_samples: @missed_samples)
       end
 
       private
 
       def process_frames(frames)
         frames.values.each do |name:, samples:, **|
-          path = name.split(/\:\:|(\#\w+)/)
+          next if samples.zero?
 
-          @root_node.add_samples(samples, path)
+          name_path = name.split(/\:\:|(\.\w+\??\!?)|(\#\w+\??\!?)/)
+
+          @tree.add(name_path, samples: samples)
         end
       end
     end

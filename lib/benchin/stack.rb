@@ -63,7 +63,7 @@ module Benchin
     # @see Report#to_h
     # @return [Hash]
     def to_h
-      report.to_s
+      report.to_h
     end
   end
 end
