@@ -1,0 +1,16 @@
+* Tasks before public release
+
+** DataTree
+
+   * [ ] Distinct Root node?
+   * [ ] Root-node-only fields
+   * [ ] Add documentation
+
+** Stack
+
+   * [ ] Root-node-only fields
+   * [ ] Render text via ~DataTree~
+
+** Wrap
+   
+   * [ ] Move to ~DataTree~
