@@ -1,43 +1,41 @@
 module Benchin
   class DataTree
     # @api private
-    # :reek:Attribute:
-    # :reek:TooManyInstanceVariables
-    class Config
+    Config = Struct.new(
+      :node_title_color,
+      :field_space,
+      :value_space,
+      :fields,
+      :on_add,
+      :on_aggregate,
+      :on_sort,
+      keyword_init: true
+    ) do
       NEUTRAL_PROC = proc {}
+      STANDARD_SORT = ->(left, right) { left <=> right }
 
-      attr_accessor :node_title_color
-
-      attr_accessor :field_space
-      attr_accessor :value_space
-
-      attr_reader :fields
-
-      attr_accessor :on_add
-      attr_accessor :on_aggregate
-      attr_accessor :on_sort
-
-      # :reek:TooManyStatements
-      def initialize
-        @node_title_color = []
-
-        @field_space = 14
-        @value_space = 7
-
-        @fields = {}
-
-        @on_add = NEUTRAL_PROC
-        @on_aggregate = NEUTRAL_PROC
-        @on_sort = NEUTRAL_PROC
-      end
-
-      def initialize_dup(orig)
-        @fields = orig.fields.transform_values(&:dup)
+      # :reek:LongParameterList:
+      def initialize(
+        node_title_color: [],
+        field_space: 14,
+        value_space: 7,
+        fields: {},
+        on_add: NEUTRAL_PROC,
+        on_aggregate: NEUTRAL_PROC,
+        on_sort: STANDARD_SORT,
+        **
+      )
         super
       end
 
+      def initialize_dup(orig)
+        super
+        self.node_title_color = orig.node_title_color.dup
+        self.fields = orig.fields.transform_values(&:dup)
+      end
+
       def default_fields
-        @fields.transform_values(&:default)
+        fields.transform_values(&:default)
       end
     end
   end
