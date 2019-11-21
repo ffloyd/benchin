@@ -30,6 +30,15 @@ RSpec.describe Benchin::DataTree do
               title: 'Percentage:',
               default_proc: -> { 100.0 }
 
+        field :gc_time,
+              title: 'GC time:',
+              default_proc: -> { 0.0 },
+              root_only: true
+
+        on_root_add do |root_data, event|
+          root_data[:gc_time] += event[:gc_time]
+        end
+
         on_add do |current_data, event, _is_leaf|
           current_data[:time] += event[:time]
         end
@@ -56,12 +65,13 @@ RSpec.describe Benchin::DataTree do
       end
     end
 
-    context 'with complex data tree, 2 additions' do
+    context 'with complex data tree, 2 path additions, 1 root addition' do
       include_context 'with full configuration'
 
       subject(:add_twice) do
         data_tree.add(%w[A B C], time: 0.1)
         data_tree.add(%w[A B C], time: 0.2)
+        data_tree.add_to_root(gc_time: 0.5)
       end
 
       it 'works without errors' do
@@ -102,18 +112,20 @@ RSpec.describe Benchin::DataTree do
       end
     end
 
-    context 'with complex data tree, 2 additions' do
+    context 'with complex data tree, 2 path additions, 1 root addition' do
       include_context 'with full configuration'
 
       before do
         data_tree.add(%w[A B D], time: 0.4)
         data_tree.add(%w[A B C], time: 0.6)
+        data_tree.add_to_root(gc_time: 0.5)
       end
 
       let(:expected_hash) do
         {
           time: 1.0,
           percentage: 100.0,
+          gc_time: 0.5,
           nested: {
             'A' => {
               time: 1.0,

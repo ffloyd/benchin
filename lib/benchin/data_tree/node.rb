@@ -11,9 +11,9 @@ module Benchin
       def initialize(name, config)
         @name = name
         @nested = {}
-
-        @data = config.default_fields
         @config = config
+
+        @data = default_fields
       end
 
       def push_event(name_path, event)
@@ -23,7 +23,7 @@ module Benchin
         return unless head
 
         (
-          @nested[head] ||= self.class.new(head, config)
+          @nested[head] ||= Node.new(head, config)
         ).push_event(name_path[1..-1], event)
 
         self
@@ -55,6 +55,12 @@ module Benchin
         @data.merge(
           nested: @nested.transform_values(&:to_h)
         )
+      end
+
+      private
+
+      def default_fields
+        config.default_fields
       end
     end
   end

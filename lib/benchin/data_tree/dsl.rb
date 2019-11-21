@@ -46,6 +46,7 @@ module Benchin
       #   Required field.
       # @option field_definition [Proc] default_proc Proc which returns default value for a field.
       #   Default value generates `nil`.
+      # @option field_definition [Boolean] root_only Is this field should exist only in a root node?
       def field(name, **field_definition)
         @config.fields[name] = FieldConfig.new(name: name, **field_definition)
       end
@@ -60,6 +61,17 @@ module Benchin
       # @yieldparam [Boolean] is_leaf Is current node a leaf or not?
       def on_add(&block)
         @config.on_add = block
+      end
+
+      # Callback to define logic when a new root event added using {DataTree#add_to_root}.
+      #
+      # Callback executed for root node only and can modify node data.
+      #
+      # @yield [root_node_data, event] callback to execute.
+      # @yieldparam [Hash] root_node_data Data of a root node. Can be modified.
+      # @yieldparam event Event to process.
+      def on_root_add(&block)
+        @config.on_root_add = block
       end
 
       # Callback to define aggregation logic.

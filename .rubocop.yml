@@ -10,6 +10,8 @@ Metrics/LineLength:
   Max: 120
 
 Metrics/BlockLength:
+  ExcludedMethods:
+    - 'Struct.new'
   Exclude:
     - 'spec/**/*'
     - '*.gemspec'

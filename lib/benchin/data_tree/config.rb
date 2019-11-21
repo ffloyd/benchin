@@ -7,6 +7,7 @@ module Benchin
       :value_space,
       :fields,
       :on_add,
+      :on_root_add,
       :on_aggregate,
       :on_sort,
       keyword_init: true
@@ -21,6 +22,7 @@ module Benchin
         value_space: 7,
         fields: {},
         on_add: NEUTRAL_PROC,
+        on_root_add: NEUTRAL_PROC,
         on_aggregate: NEUTRAL_PROC,
         on_sort: STANDARD_SORT,
         **
@@ -35,6 +37,12 @@ module Benchin
       end
 
       def default_fields
+        fields
+          .reject { |_, field_cfg| field_cfg.root_only }
+          .transform_values(&:default)
+      end
+
+      def default_root_fields
         fields.transform_values(&:default)
       end
     end

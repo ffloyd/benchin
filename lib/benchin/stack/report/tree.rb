@@ -20,8 +20,17 @@ module Benchin
               title: '% of parent samples:',
               default_proc: -> { 100.0 }
 
+        field :missed_samples,
+              title: 'Missed Samples:',
+              default_proc: -> { 0 },
+              root_only: true
+
         on_add do |current_data, event, _is_leaf|
           current_data[:samples] += event[:samples]
+        end
+
+        on_root_add do |root_data, event|
+          root_data[:missed_samples] += event[:missed_samples]
         end
 
         on_aggregate do |root_data, parent_data, child_data|

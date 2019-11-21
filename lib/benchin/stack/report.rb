@@ -12,8 +12,7 @@ module Benchin
       end
 
       def add_profile(stackprof_data)
-        @missed_samples += stackprof_data[:missed_samples]
-
+        @tree.add_to_root(missed_samples: stackprof_data[:missed_samples])
         process_frames(stackprof_data[:frames])
 
         self
@@ -24,7 +23,7 @@ module Benchin
       end
 
       def to_h
-        @tree.to_h.merge(missed_samples: @missed_samples)
+        @tree.to_h
       end
 
       private

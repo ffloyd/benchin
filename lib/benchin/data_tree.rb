@@ -2,6 +2,7 @@ require_relative './data_tree/field_config'
 require_relative './data_tree/config'
 require_relative './data_tree/dsl'
 require_relative './data_tree/node'
+require_relative './data_tree/root_node'
 
 module Benchin
   # Defines generalized data structure for collecting and rendering tree-like reports.
@@ -14,7 +15,7 @@ module Benchin
     #
     # @param name [String] name for the root node
     def initialize(name = 'ROOT')
-      @root = Node.new(name, config)
+      @root = RootNode.new(name, config)
       @built = false
     end
 
@@ -29,8 +30,18 @@ module Benchin
     # @param event event object to process
     # @return [DataTree] self
     def add(name_path, event)
-      @root.push_event(name_path, event)
       @built = false
+      @root.push_event(name_path, event)
+      self
+    end
+
+    # Adds an event to a root node.
+    #
+    # @param event event object to process
+    # @return [DataTree] self
+    def add_to_root(event)
+      @built = false
+      @root.push_root_event(event)
       self
     end
 

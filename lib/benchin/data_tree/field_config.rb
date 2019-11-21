@@ -5,9 +5,10 @@ module Benchin
       :name,
       :title,
       :default_proc,
+      :root_only,
       keyword_init: true
     ) do
-      def initialize(*)
+      def initialize(**)
         super
       end
 
