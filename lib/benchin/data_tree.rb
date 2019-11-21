@@ -15,6 +15,7 @@ module Benchin
     # @param name [String] name for the root node
     def initialize(name = 'ROOT')
       @root = Node.new(name, config)
+      @built = false
     end
 
     # Adds an event to a provided path in a tree.
@@ -29,6 +30,7 @@ module Benchin
     # @return [DataTree] self
     def add(name_path, event)
       @root.push_event(name_path, event)
+      @built = false
       self
     end
 
@@ -36,16 +38,15 @@ module Benchin
     #
     # @return [Hash] hash representation
     def to_h
-      @root
-        .aggregate(@root.data)
-        .deep_sort_nested
-        .to_h
+      build
+      @root.to_h
     end
 
     # Renders to string with TTY colors.
     #
     # @return [String]
     def to_s
+      build
       to_h.inspect
     end
 
@@ -54,6 +55,18 @@ module Benchin
     # @return [Config]
     def config
       self.class.config
+    end
+
+    private
+
+    def build
+      return if @built
+
+      @root
+        .aggregate(@root.data)
+        .deep_sort_nested
+
+      @built = true
     end
   end
 end
