@@ -24,14 +24,10 @@ RSpec.describe Benchin::DataTree do
 
         field :time,
               title: 'Time:',
-              type: :integer,
               default_proc: -> { 0 }
 
         field :percentage,
               title: 'Percentage:',
-              type: :float,
-              precision: 3,
-              value_suffix: '%',
               default_proc: -> { 100.0 }
 
         on_add do |current_data, event, _is_leaf|

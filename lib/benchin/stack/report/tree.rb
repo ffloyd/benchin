@@ -9,12 +9,15 @@ module Benchin
         value_space 7
 
         field :samples,
+              title: 'Samples:',
               default_proc: -> { 0 }
 
         field :global_percentage,
+              title: '% of total samples:',
               default_proc: -> { 100.0 }
 
         field :local_percentage,
+              title: '% of parent samples:',
               default_proc: -> { 100.0 }
 
         on_add do |current_data, event, _is_leaf|

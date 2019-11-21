@@ -1,13 +1,9 @@
 module Benchin
   class DataTree
     # @api private
-    # :reek:Attribute:
     FieldConfig = Struct.new(
       :name,
       :title,
-      :type,
-      :precision,
-      :value_suffix,
       :default_proc,
       keyword_init: true
     ) do
