@@ -19,7 +19,7 @@ module Benchin
       end
 
       def to_s
-        to_h.inspect
+        @tree.to_s
       end
 
       def to_h

@@ -5,24 +5,36 @@ module Benchin
       class Tree < DataTree
         node_title_color %i[bright]
 
-        field_space 14
+        field_space 20
         value_space 7
 
         field :samples,
               title: 'Samples:',
-              default_proc: -> { 0 }
+              default_proc: -> { 0 },
+              title_color: %i[blue],
+              value_color: %i[green bright]
 
         field :global_percentage,
               title: '% of total samples:',
-              default_proc: -> { 100.0 }
+              default_proc: -> { 100.0 },
+              suffix: '%',
+              float_truncate: 2,
+              title_color: %i[blue],
+              value_color: %i[green]
 
         field :local_percentage,
               title: '% of parent samples:',
-              default_proc: -> { 100.0 }
+              default_proc: -> { 100.0 },
+              suffix: '%',
+              float_truncate: 2,
+              title_color: %i[blue],
+              value_color: %i[green]
 
         field :missed_samples,
               title: 'Missed Samples:',
               default_proc: -> { 0 },
+              title_color: %i[blue],
+              value_color: %i[green],
               root_only: true
 
         on_add do |current_data, event, _is_leaf|
