@@ -4,11 +4,17 @@ module Benchin
     FieldConfig = Struct.new(
       :name,
       :title,
+      :title_color,
+      :value_color,
       :default_proc,
       :root_only,
       keyword_init: true
     ) do
-      def initialize(**)
+      def initialize(
+        title_color: [],
+        value_color: [],
+        **
+      )
         super
       end
 

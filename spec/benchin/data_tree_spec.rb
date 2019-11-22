@@ -24,15 +24,21 @@ RSpec.describe Benchin::DataTree do
 
         field :time,
               title: 'Time:',
-              default_proc: -> { 0 }
+              default_proc: -> { 0 },
+              title_color: %i[blue],
+              value_color: %i[green bright]
 
         field :percentage,
               title: 'Percentage:',
-              default_proc: -> { 100.0 }
+              default_proc: -> { 100.0 },
+              title_color: %i[blue],
+              value_color: %i[green]
 
         field :gc_time,
               title: 'GC time:',
               default_proc: -> { 0.0 },
+              title_color: %i[blue],
+              value_color: %i[green],
               root_only: true
 
         on_root_add do |root_data, event|
@@ -170,12 +176,13 @@ RSpec.describe Benchin::DataTree do
       it { expect(to_s).to be_a String }
     end
 
-    context 'with complex data tree, 2 additions' do
+    context 'with complex data tree, 2 additions, 1 root addition' do
       include_context 'with full configuration'
 
       before do
         data_tree.add(%w[A B C], time: 0.6)
         data_tree.add(%w[A B D], time: 0.4)
+        data_tree.add_to_root(gc_time: 0.5)
       end
 
       it { expect(to_s).to be_a String }

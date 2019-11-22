@@ -57,6 +57,10 @@ module Benchin
         )
       end
 
+      def to_s
+        NodeTextRenderer.new(self).call
+      end
+
       private
 
       def default_fields

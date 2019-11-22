@@ -3,6 +3,7 @@ require_relative './data_tree/config'
 require_relative './data_tree/dsl'
 require_relative './data_tree/node'
 require_relative './data_tree/root_node'
+require_relative './data_tree/node_text_renderer'
 
 module Benchin
   # Defines generalized data structure for collecting and rendering tree-like reports.
@@ -58,7 +59,7 @@ module Benchin
     # @return [String]
     def to_s
       build
-      to_h.inspect
+      @root.to_s
     end
 
     # Returns current configuration
