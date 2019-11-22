@@ -25,18 +25,24 @@ RSpec.describe Benchin::DataTree do
         field :time,
               title: 'Time:',
               default_proc: -> { 0 },
+              suffix: 's',
+              float_truncate: 3,
               title_color: %i[blue],
               value_color: %i[green bright]
 
         field :percentage,
               title: 'Percentage:',
               default_proc: -> { 100.0 },
+              suffix: '%',
+              float_truncate: 2,
               title_color: %i[blue],
               value_color: %i[green]
 
         field :gc_time,
               title: 'GC time:',
               default_proc: -> { 0.0 },
+              suffix: 's',
+              float_truncate: 3,
               title_color: %i[blue],
               value_color: %i[green],
               root_only: true

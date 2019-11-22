@@ -63,9 +63,19 @@ module Benchin
 
       def render_value(value, field_config)
         colorize(
-          value.to_s.rjust(node.config.value_space),
+          prepare_value(value, field_config).to_s.rjust(node.config.value_space),
           field_config.value_color
         )
+      end
+
+      def prepare_value(value, field_config)
+        float_truncate = field_config.float_truncate
+        suffix = field_config.suffix
+
+        value = value.truncate(float_truncate) if float_truncate
+        value = value.to_s + suffix if suffix
+
+        value
       end
 
       def nested
