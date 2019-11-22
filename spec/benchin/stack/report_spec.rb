@@ -85,8 +85,6 @@ RSpec.describe Benchin::Stack::Report do
         {
           samples: 123,
           missed_samples: 10,
-          global_percentage: 100.0,
-          local_percentage: 100.0,
           nested: {
             'A' => {
               samples: 123,
@@ -130,8 +128,6 @@ RSpec.describe Benchin::Stack::Report do
         {
           samples: 123 + 50,
           missed_samples: 10,
-          global_percentage: 100.0,
-          local_percentage: 100.0,
           nested: {
             'A' => {
               samples: 123 + 50,
@@ -181,8 +177,6 @@ RSpec.describe Benchin::Stack::Report do
         {
           samples: 0,
           missed_samples: 0,
-          global_percentage: 100.0,
-          local_percentage: 100.0,
           nested: {}
         }
       end

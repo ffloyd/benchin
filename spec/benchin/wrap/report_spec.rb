@@ -40,7 +40,7 @@ RSpec.describe Benchin::Wrap::Report do
           .add_time(%w[NESTED], 7.0)
       end
 
-      let(:expected_to_a) do
+      let(:expected_to_h) do
         {
           name: name,
           total_seconds: 22.0,
@@ -75,7 +75,7 @@ RSpec.describe Benchin::Wrap::Report do
       end
 
       it 'builds correct data' do
-        expect(instance.to_h).to eq(expected_to_a)
+        expect(instance.to_h).to eq(expected_to_h)
       end
     end
   end

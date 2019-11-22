@@ -36,7 +36,8 @@ RSpec.describe Benchin::DataTree do
               suffix: '%',
               float_truncate: 2,
               title_color: %i[blue],
-              value_color: %i[green]
+              value_color: %i[green],
+              child_only: true
 
         field :gc_time,
               title: 'GC time:',
@@ -136,7 +137,6 @@ RSpec.describe Benchin::DataTree do
       let(:expected_hash) do
         {
           time: 1.0,
-          percentage: 100.0,
           gc_time: 0.5,
           nested: {
             'A' => {

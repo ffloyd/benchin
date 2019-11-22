@@ -43,7 +43,9 @@ module Benchin
       end
 
       def default_root_fields
-        fields.transform_values(&:default)
+        fields
+          .reject { |_, field_cfg| field_cfg.child_only }
+          .transform_values(&:default)
       end
     end
   end

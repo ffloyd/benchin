@@ -20,7 +20,8 @@ module Benchin
               suffix: '%',
               float_truncate: 2,
               title_color: %i[blue],
-              value_color: %i[green]
+              value_color: %i[green],
+              child_only: true
 
         field :local_percentage,
               title: '% of parent samples:',
@@ -28,7 +29,8 @@ module Benchin
               suffix: '%',
               float_truncate: 2,
               title_color: %i[blue],
-              value_color: %i[green]
+              value_color: %i[green],
+              child_only: true
 
         field :missed_samples,
               title: 'Missed Samples:',

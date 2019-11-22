@@ -68,6 +68,7 @@ module Benchin
         )
       end
 
+      # :reek:UtilityFunction
       def prepare_value(value, field_config)
         float_truncate = field_config.float_truncate
         suffix = field_config.suffix
@@ -89,7 +90,7 @@ module Benchin
         '|   ' * indent
       end
 
-      # :reek:Utilityfunction
+      # :reek:UtilityFunction
       def colorize(text, color_list)
         color_list.reduce(Rainbow(text)) do |rb_text, color|
           rb_text.public_send(color)

@@ -8,6 +8,7 @@ module Benchin
       :value_color,
       :default_proc,
       :root_only,
+      :child_only,
       :suffix,
       :float_truncate,
       keyword_init: true
