@@ -7,7 +7,7 @@ module Benchin
       :value_space,
       :fields,
       :on_add,
-      :on_root_add,
+      :on_add_to_root,
       :postprocessor,
       :node_comparator,
       keyword_init: true
@@ -22,7 +22,7 @@ module Benchin
         value_space: 7,
         fields: {},
         on_add: NEUTRAL_PROC,
-        on_root_add: NEUTRAL_PROC,
+        on_add_to_root: NEUTRAL_PROC,
         postprocessor: NEUTRAL_PROC,
         node_comparator: STANDARD_NODE_COMPARATOR,
         **

@@ -45,7 +45,7 @@ module Benchin
           end
         end
 
-        on_root_add do |root_data, event|
+        on_add_to_root do |root_data, event|
           root_data[:missed_samples] += event[:missed_samples]
         end
 

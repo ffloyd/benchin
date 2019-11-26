@@ -40,7 +40,7 @@ module Benchin
     # @param event event object to process
     # @return [DataTree] self
     def add_to_root(event)
-      @root.push_root_event(event)
+      config.on_add_to_root.call(@root.data, event)
       self
     end
 

@@ -48,7 +48,7 @@ RSpec.describe Benchin::DataTree do
               value_color: %i[green],
               root_only: true
 
-        on_root_add do |root_data, event|
+        on_add_to_root do |root_data, event|
           root_data[:gc_time] += event[:gc_time]
         end
 

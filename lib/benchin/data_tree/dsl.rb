@@ -70,8 +70,8 @@ module Benchin
       # @yield [root_node_data, event] callback to execute.
       # @yieldparam [Hash] root_node_data Data of a root node. Can be modified.
       # @yieldparam event Event to process.
-      def on_root_add(&block)
-        @config.on_root_add = block
+      def on_add_to_root(&block)
+        @config.on_add_to_root = block
       end
 
       # Callback to define aggregation logic.
