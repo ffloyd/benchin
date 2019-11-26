@@ -67,3 +67,5 @@ module Benchin
     end
   end
 end
+
+require_relative 'node/root'

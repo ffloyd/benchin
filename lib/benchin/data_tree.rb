@@ -2,7 +2,6 @@ require_relative './data_tree/field_config'
 require_relative './data_tree/config'
 require_relative './data_tree/dsl'
 require_relative './data_tree/node'
-require_relative './data_tree/root_node'
 require_relative './data_tree/node_text_renderer'
 
 module Benchin
@@ -16,7 +15,7 @@ module Benchin
     #
     # @param name [String] name for the root node
     def initialize(name = 'ROOT')
-      @root = RootNode.new(name, config)
+      @root = Node::Root.new(name, config)
     end
 
     # Adds an event to a provided path in a tree.
