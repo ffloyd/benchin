@@ -85,8 +85,8 @@ module Benchin
       # @yieldparam [Hash] root_node_data Data of a root node. Can be modified.
       # @yieldparam [Hash] parent_node_data Data of a parent node. Can be modified.
       # @yieldparam [Hash] child_node_data Data of a child node. Can be modified.
-      def on_aggregate(&block)
-        @config.on_aggregate = block
+      def postprocessor(&block)
+        @config.postprocessor = block
       end
 
       # Callback to sorting child nodes.

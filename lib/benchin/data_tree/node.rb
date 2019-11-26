@@ -45,15 +45,8 @@ module Benchin
         self
       end
 
-      def aggregate(context = nil)
-        @nested.each_value do |node|
-          node.aggregate(context)
-          child_data = node.data
-
-          @config.on_aggregate.call(context, @data, child_data)
-        end
-
-        self
+      def dfs_postorder
+        nested.values.map(&:dfs_postorder).flatten + [self]
       end
 
       def to_h

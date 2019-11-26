@@ -52,14 +52,23 @@ RSpec.describe Benchin::DataTree do
           root_data[:gc_time] += event[:gc_time]
         end
 
-        on_add do |node_path, event, _is_leaf|
+        on_add do |node_path, event|
           node_path.each do |node|
             node.data[:time] += event[:time]
           end
         end
 
-        on_aggregate do |root_data, _parent_data, child_data|
-          child_data[:percentage] = (child_data[:time] * 100.0) / root_data[:time]
+        postprocessor do |dfs_postorder|
+          root = dfs_postorder.last
+          root_time = root.data[:time]
+
+          dfs_postorder[0..-2].each do |parent_node|
+            parent_node.nested.each_value do |child_node|
+              child_data = child_node.data
+
+              child_data[:percentage] = (100.0 * child_data[:time]) / root_time
+            end
+          end
         end
 
         node_comparator do |a, b|

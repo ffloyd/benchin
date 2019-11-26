@@ -8,7 +8,7 @@ module Benchin
       :fields,
       :on_add,
       :on_root_add,
-      :on_aggregate,
+      :postprocessor,
       :node_comparator,
       keyword_init: true
     ) do
@@ -23,7 +23,7 @@ module Benchin
         fields: {},
         on_add: NEUTRAL_PROC,
         on_root_add: NEUTRAL_PROC,
-        on_aggregate: NEUTRAL_PROC,
+        postprocessor: NEUTRAL_PROC,
         node_comparator: STANDARD_NODE_COMPARATOR,
         **
       )

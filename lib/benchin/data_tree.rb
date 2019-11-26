@@ -75,9 +75,9 @@ module Benchin
     def build
       return if @built
 
-      @root
-        .aggregate(@root.data)
-        .deep_sort_nested(&config.node_comparator)
+      @root.deep_sort_nested(&config.node_comparator)
+
+      config.postprocessor.call(@root.dfs_postorder)
 
       @built = true
     end

@@ -49,9 +49,18 @@ module Benchin
           root_data[:missed_samples] += event[:missed_samples]
         end
 
-        on_aggregate do |root_data, parent_data, child_data|
-          child_data[:global_percentage] = 100.0 * child_data[:samples] / root_data[:samples]
-          child_data[:local_percentage] = 100.0 * child_data[:samples] / parent_data[:samples]
+        postprocessor do |dfs_postorder|
+          root_samples = dfs_postorder.last.data[:samples]
+
+          dfs_postorder[0..-2].each do |parent_node|
+            parent_data = parent_node.data
+            parent_node.nested.each_value do |child_node|
+              child_data = child_node.data
+
+              child_data[:global_percentage] = 100.0 * child_data[:samples] / root_samples
+              child_data[:local_percentage] = 100.0 * child_data[:samples] / parent_data[:samples]
+            end
+          end
         end
 
         node_comparator do |data_a, data_b|
