@@ -95,8 +95,8 @@ module Benchin
       # @yieldparam [Hash] node_a_data
       # @yieldparam [Hash] node_b_data
       # @yieldreturn [Integer] -1, 0 or 1
-      def on_sort(&block)
-        @config.on_sort = block
+      def node_comparator(&block)
+        @config.node_comparator = block
       end
     end
   end

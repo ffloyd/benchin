@@ -26,13 +26,21 @@ module Benchin
         ).get_or_create_node_path(name_path[1..-1])
       end
 
-      def deep_sort_nested
+      def sort_nested
         @nested =
           @nested
-          .sort { |(_, node_a), (_, node_b)| @config.on_sort.call(node_a.data, node_b.data) }
+          .sort { |(_, node_a), (_, node_b)| yield(node_a.data, node_b.data) }
           .to_h
 
-        @nested.each_value(&:deep_sort_nested)
+        self
+      end
+
+      def deep_sort_nested(&comparator)
+        sort_nested(&comparator)
+
+        nested.each_value do |nested_node|
+          nested_node.deep_sort_nested(&comparator)
+        end
 
         self
       end

@@ -54,7 +54,7 @@ module Benchin
           child_data[:local_percentage] = 100.0 * child_data[:samples] / parent_data[:samples]
         end
 
-        on_sort do |data_a, data_b|
+        node_comparator do |data_a, data_b|
           data_b[:samples] <=> data_a[:samples]
         end
       end

@@ -77,7 +77,7 @@ module Benchin
 
       @root
         .aggregate(@root.data)
-        .deep_sort_nested
+        .deep_sort_nested(&config.node_comparator)
 
       @built = true
     end

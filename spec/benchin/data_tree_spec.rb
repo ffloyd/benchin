@@ -62,7 +62,7 @@ RSpec.describe Benchin::DataTree do
           child_data[:percentage] = (child_data[:time] * 100.0) / root_data[:time]
         end
 
-        on_sort do |a, b|
+        node_comparator do |a, b|
           a[:time] <=> b[:time]
         end
       end

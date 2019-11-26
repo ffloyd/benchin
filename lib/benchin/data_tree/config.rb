@@ -9,11 +9,11 @@ module Benchin
       :on_add,
       :on_root_add,
       :on_aggregate,
-      :on_sort,
+      :node_comparator,
       keyword_init: true
     ) do
       NEUTRAL_PROC = proc {}
-      STANDARD_SORT = ->(left, right) { left <=> right }
+      STANDARD_NODE_COMPARATOR = ->(left, right) { left <=> right }
 
       # :reek:LongParameterList:
       def initialize(
@@ -24,7 +24,7 @@ module Benchin
         on_add: NEUTRAL_PROC,
         on_root_add: NEUTRAL_PROC,
         on_aggregate: NEUTRAL_PROC,
-        on_sort: STANDARD_SORT,
+        node_comparator: STANDARD_NODE_COMPARATOR,
         **
       )
         super
