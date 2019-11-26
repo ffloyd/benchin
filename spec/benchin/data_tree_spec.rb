@@ -96,6 +96,7 @@ RSpec.describe Benchin::DataTree do
         data_tree.add(%w[A B C], time: 0.1)
         data_tree.add(%w[A B C], time: 0.2)
         data_tree.add_to_root(gc_time: 0.5)
+        data_tree.postprocess
       end
 
       it 'works without errors' do
@@ -143,6 +144,7 @@ RSpec.describe Benchin::DataTree do
         data_tree.add(%w[A B D], time: 0.4)
         data_tree.add(%w[A B C], time: 0.6)
         data_tree.add_to_root(gc_time: 0.5)
+        data_tree.postprocess
       end
 
       let(:expected_hash) do
@@ -200,6 +202,7 @@ RSpec.describe Benchin::DataTree do
         data_tree.add(%w[A B C], time: 0.6)
         data_tree.add(%w[A B D], time: 0.4)
         data_tree.add_to_root(gc_time: 0.5)
+        data_tree.postprocess
       end
 
       it { expect(to_s).to be_a String }

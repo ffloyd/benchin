@@ -17,7 +17,6 @@ module Benchin
     # @param name [String] name for the root node
     def initialize(name = 'ROOT')
       @root = RootNode.new(name, config)
-      @built = false
     end
 
     # Adds an event to a provided path in a tree.
@@ -31,7 +30,6 @@ module Benchin
     # @param event event object to process
     # @return [DataTree] self
     def add(name_path, event)
-      @built = false
       node_path = @root.get_or_create_node_path(name_path)
       config.on_add.call(node_path, event)
       self
@@ -42,7 +40,6 @@ module Benchin
     # @param event event object to process
     # @return [DataTree] self
     def add_to_root(event)
-      @built = false
       @root.push_root_event(event)
       self
     end
@@ -51,7 +48,6 @@ module Benchin
     #
     # @return [Hash] hash representation
     def to_h
-      build
       @root.to_h
     end
 
@@ -59,7 +55,6 @@ module Benchin
     #
     # @return [String]
     def to_s
-      build
       @root.to_s
     end
 
@@ -70,16 +65,10 @@ module Benchin
       self.class.config
     end
 
-    private
-
-    def build
-      return if @built
-
+    def postprocess
       @root.deep_sort_nested(&config.node_comparator)
-
       config.postprocessor.call(@root.dfs_postorder)
-
-      @built = true
+      self
     end
   end
 end

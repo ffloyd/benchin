@@ -19,11 +19,11 @@ module Benchin
       end
 
       def to_s
-        @tree.to_s
+        @tree.postprocess.to_s
       end
 
       def to_h
-        @tree.to_h
+        @tree.postprocess.to_h
       end
 
       private
