@@ -39,8 +39,10 @@ module Benchin
               value_color: %i[green],
               root_only: true
 
-        on_add do |current_data, event, _is_leaf|
-          current_data[:samples] += event[:samples]
+        on_add do |node_path, event|
+          node_path.each do |node|
+            node.data[:samples] += event[:samples]
+          end
         end
 
         on_root_add do |root_data, event|

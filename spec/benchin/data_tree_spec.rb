@@ -52,8 +52,10 @@ RSpec.describe Benchin::DataTree do
           root_data[:gc_time] += event[:gc_time]
         end
 
-        on_add do |current_data, event, _is_leaf|
-          current_data[:time] += event[:time]
+        on_add do |node_path, event, _is_leaf|
+          node_path.each do |node|
+            node.data[:time] += event[:time]
+          end
         end
 
         on_aggregate do |root_data, _parent_data, child_data|

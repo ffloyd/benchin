@@ -16,17 +16,14 @@ module Benchin
         @data = default_fields
       end
 
-      def push_event(name_path, event)
-        @config.on_add.call(@data, event, @nested.empty?)
+      def get_or_create_node_path(name_path)
+        return [self] if name_path.empty?
 
-        head = name_path[0]
-        return unless head
+        next_node_name = name_path.first
 
-        (
-          @nested[head] ||= Node.new(head, config)
-        ).push_event(name_path[1..-1], event)
-
-        self
+        [self] + (
+          nested[next_node_name] ||= Node.new(next_node_name, config)
+        ).get_or_create_node_path(name_path[1..-1])
       end
 
       def deep_sort_nested

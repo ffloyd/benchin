@@ -32,7 +32,8 @@ module Benchin
     # @return [DataTree] self
     def add(name_path, event)
       @built = false
-      @root.push_event(name_path, event)
+      node_path = @root.get_or_create_node_path(name_path)
+      config.on_add.call(node_path, event)
       self
     end
 
