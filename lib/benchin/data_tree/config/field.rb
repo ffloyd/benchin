@@ -1,7 +1,7 @@
 module Benchin
   class DataTree
     # @api private
-    FieldConfig = Struct.new(
+    Config::Field = Struct.new(
       :name,
       :title,
       :title_color,
@@ -19,8 +19,8 @@ module Benchin
         **rest
       )
         super(
-          title_color: ColorDefinition.new(title_color),
-          value_color: ColorDefinition.new(value_color),
+          title_color: Config::Color.new(title_color),
+          value_color: Config::Color.new(value_color),
           **rest
         )
       end

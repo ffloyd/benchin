@@ -1,5 +1,3 @@
-require_relative './data_tree/color_definition'
-require_relative './data_tree/field_config'
 require_relative './data_tree/config'
 require_relative './data_tree/dsl'
 require_relative './data_tree/node'

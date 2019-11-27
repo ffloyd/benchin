@@ -3,7 +3,7 @@ require 'rainbow'
 module Benchin
   class DataTree
     # @api private
-    class ColorDefinition
+    class Config::Color
       attr_reader :color_list
 
       def initialize(color_list)

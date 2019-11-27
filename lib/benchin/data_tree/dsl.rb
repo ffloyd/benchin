@@ -22,7 +22,7 @@ module Benchin
       #
       # @param color_list [Array<Symbol>]
       def node_title_color(color_list)
-        @config.node_title_color = ColorDefinition.new(color_list)
+        @config.node_title_color = Config::Color.new(color_list)
       end
 
       # Space reserved for field titles when rendering to string.
@@ -48,7 +48,7 @@ module Benchin
       #   Default value generates `nil`.
       # @option field_definition [Boolean] root_only Is this field should exist only in a root node?
       def field(name, **field_definition)
-        @config.fields[name] = FieldConfig.new(name: name, **field_definition)
+        @config.fields[name] = Config::Field.new(name: name, **field_definition)
       end
 
       # Callback to define logic when a new event added using {DataTree#add}.

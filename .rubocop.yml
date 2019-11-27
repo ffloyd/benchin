@@ -25,6 +25,10 @@ Metrics/ParameterLists:
 RSpec/MessageSpies:
   EnforcedStyle: receive
 
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'lib/benchin/data_tree/config/*.rb'
+
 Naming/UncommunicativeMethodParamName:
   Exclude:
     - '**/*.md'

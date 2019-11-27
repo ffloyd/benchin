@@ -50,3 +50,6 @@ module Benchin
     end
   end
 end
+
+require_relative 'config/color'
+require_relative 'config/field'
