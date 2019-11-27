@@ -1,16 +1,7 @@
-* Tasks before public release
+* Tasks before public release [4/5]
 
-** DataTree
-
-   * [ ] Distinct Root node?
-   * [ ] Root-node-only fields
-   * [ ] Add documentation
-
-** Stack
-
-   * [ ] Root-node-only fields
-   * [ ] Render text via ~DataTree~
-
-** Wrap
-   
-   * [ ] Move to ~DataTree~
+  * [X] Change ~on_add~ signature
+  * [X] Refactor ~on_aggregate~ to ~on_dfs_postorder { |node | ... }~
+  * [X] Refactor ~RootNode~ to ~Node::Root~
+  * [X] Add ~Config::ColorDefinition~ to get rid of utility method.
+  * [ ] Define ~NodeRenderer~ abstract class and refactor to have ~NodeRenderer::TermText~, ~NodeRenderer::TermText::Field~
