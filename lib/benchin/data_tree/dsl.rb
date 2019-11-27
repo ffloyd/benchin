@@ -22,7 +22,7 @@ module Benchin
       #
       # @param color_list [Array<Symbol>]
       def node_title_color(color_list)
-        @config.node_title_color = color_list
+        @config.node_title_color = ColorDefinition.new(color_list)
       end
 
       # Space reserved for field titles when rendering to string.

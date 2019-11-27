@@ -16,9 +16,13 @@ module Benchin
       def initialize(
         title_color: [],
         value_color: [],
-        **
+        **rest
       )
-        super
+        super(
+          title_color: ColorDefinition.new(title_color),
+          value_color: ColorDefinition.new(value_color),
+          **rest
+        )
       end
 
       def default

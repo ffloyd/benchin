@@ -92,9 +92,7 @@ module Benchin
 
       # :reek:UtilityFunction
       def colorize(text, color_list)
-        color_list.reduce(Rainbow(text)) do |rb_text, color|
-          rb_text.public_send(color)
-        end
+        color_list.apply(text)
       end
     end
   end
